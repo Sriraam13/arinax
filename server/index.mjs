@@ -157,7 +157,7 @@ async function createOrder(req, res) {
     if (!holdId || !['advance', 'full'].includes(paymentMode)) {
       return json(res, 400, { error: 'Select a valid booking and payment option.', code: 'INVALID_BOOKING_INPUT', requestId, stage })
     }
-    if (typeof customerName !== 'string' || customerName.trim().length < 2 || typeof customerPhone !== 'string' || customerPhone.trim().length < 8) {
+    typeof customerPhone !== 'string' || !/^\d{10}$/.test(customerPhone.trim())
       return json(res, 400, { error: 'Enter a valid name and phone number.', code: 'INVALID_CUSTOMER_INPUT', requestId, stage })
     }
     log('request_validated', { paymentMode, whatsappOptIn: whatsappOptIn === true })
