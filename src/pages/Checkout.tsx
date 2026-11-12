@@ -71,10 +71,9 @@ export default function Checkout() {
   const validate = () => {
     const errs: Partial<CustomerInfo> = {}
     if (!customer.name.trim()) errs.name = 'Full name is required'
-    if (!customer.phone.trim() || !/^\+?[\d\s-]{8,}$/.test(customer.phone))
-      errs.phone = 'Enter a valid phone number'
-    else if (whatsappOptIn && (!/^\+/.test(customer.phone.trim()) || customer.phone.replace(/\D/g, '').length < 8 || customer.phone.replace(/\D/g, '').length > 15))
-      errs.phone = 'Include the country code for WhatsApp, for example +91 98765 43210'
+    if (!/^\d{10}$/.test(customer.phone.trim())) {
+  errs.phone = 'Enter a valid 10-digit mobile number'
+}
     if (!customer.email.trim() || !/^[^@]+@[^@]+\.[^@]+$/.test(customer.email))
       errs.email = 'Enter a valid email address'
     setErrors(errs)
