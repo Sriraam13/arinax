@@ -39,8 +39,15 @@ const whatsappReady = whatsappMode === 'dry-run' || whatsappMode === 'off' || Bo
   whatsappAppSecret && whatsappWebhookVerifyToken && Object.values(whatsappTemplates).every(Boolean),
 )
 const port = Number(process.env.PORT || 43127)
-const allowedOrigins = new Set((process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:54173,http://127.0.0.1:54173')
-  .split(',').map(origin => origin.trim().replace(/\/$/, '')).filter(Boolean))
+const allowedOrigins = new Set(
+  (
+    process.env.ALLOWED_ORIGINS ||
+    'https://arinax.onrender.com,http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:54173,http://127.0.0.1:54173'
+  )
+    .split(',')
+    .map(origin => origin.trim().replace(/\/$/, ''))
+    .filter(Boolean)
+)
 const ordersReady = Boolean(projectUrl && serviceRoleKey && razorpayKeyId && razorpayKeySecret)
 const webhooksReady = Boolean(projectUrl && serviceRoleKey && razorpayWebhookSecret)
 const missingServerConfig = [
